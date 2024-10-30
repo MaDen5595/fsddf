@@ -6,25 +6,25 @@
 #include <fcntl.h>
 #define BUFSZ 4096
 int main(int argc, char *argv[]) { 
-int shmid;  /* ID сегмента */
-char *shmbuf; /* Адрес в адресном пространстве процесса */ 
-int fd; /* Фаи?ловыи? дескриптор */
-int i; /* Счетчик */ 
-if(argc != 2) { /* id сегмента должно передаваться в команднои? строке */ 
-puts(“USAGE: opshm <identifier>”);
+int shmid;  /* ID Г±ГҐГЈГ¬ГҐГ­ГІГ  */
+char *shmbuf; /* ГЂГ¤Г°ГҐГ± Гў Г Г¤Г°ГҐГ±Г­Г®Г¬ ГЇГ°Г®Г±ГІГ°Г Г­Г±ГІГўГҐ ГЇГ°Г®Г¶ГҐГ±Г±Г  */ 
+int fd; /* Г”Г ГЁ?Г«Г®ГўГ»ГЁ? Г¤ГҐГ±ГЄГ°ГЁГЇГІГ®Г° */
+int i; /* Г‘Г·ГҐГІГ·ГЁГЄ */ 
+if(argc != 2) { /* id Г±ГҐГЈГ¬ГҐГ­ГІГ  Г¤Г®Г«Г¦Г­Г® ГЇГҐГ°ГҐГ¤Г ГўГ ГІГјГ±Гї Гў ГЄГ®Г¬Г Г­Г¤Г­Г®ГЁ? Г±ГІГ°Г®ГЄГҐ */ 
+puts(вЂњUSAGE: opshm <identifier>вЂќ);
 exit (EXIT_FAILURE); 
 }
 shmid = atoi(argv[1]);
-if((shmbuf = shmat(shmid, 0, 0)) < (char *)0) { /* Присоединяем сегмент */ 
+if((shmbuf = shmat(shmid, 0, 0)) < (char *)0) { /* ГЏГ°ГЁГ±Г®ГҐГ¤ГЁГ­ГїГҐГ¬ Г±ГҐГЈГ¬ГҐГ­ГІ */ 
     perror("shmat"); 
     exit(EXIT_FAILURE); 
 } 
-if((shmbuf = malloc(sizeof(char) * BUFSZ)) == NULL) { /* Резервируем память для shmbuf */ 
+if((shmbuf = malloc(sizeof(char) * BUFSZ)) == NULL) { /* ГђГҐГ§ГҐГ°ГўГЁГ°ГіГҐГ¬ ГЇГ Г¬ГїГІГј Г¤Г«Гї shmbuf */ 
    perror("malloc"); 
    exit(EXIT_FAILURE); 
 } 
 for(i = 0; i < BUFSZ; ++i) shmbuf[i] = i % 127; 
-fd = open("opshm.out", O_CREAT ¦ O_WRONLY, 0600); 
-write(fd, shmbuf, BUFSZ);
+fd = open("opshm.out", O_CREAT В¦ O_WRONLY, 0600); 
+fwrite(fd, shmbuf, BUFSZ);
 exit(EXIT_SUCCESS); 
 } 
