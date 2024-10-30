@@ -7,12 +7,12 @@ int main(int argc, char *argv[]) {
 int qid;
 key_t key;
 key = 123;
-if((qid == msgget(key, IPC_CREAT ¦ 0666)) < 0) {  /* Ñîçäàíèå î÷åðåäè */ 
+if((qid == msgget(key, IPC_CREAT , 0666)) < 0) {  /* Ã‘Ã®Ã§Ã¤Ã Ã­Ã¨Ã¥ Ã®Ã·Ã¥Ã°Ã¥Ã¤Ã¨ */ 
     perror("msgget:create"); 
     exit(EXIT_FAILURE); 
 } 
 printf("created queue id = %d\n", qid); 
-if((qid == msgget(key, 0)) < 0) { /* Îòêðûòü î÷åðåäü åùå ðàç */ 
+if((qid == msgget(key, 0)) < 0) { /* ÃŽÃ²ÃªÃ°Ã»Ã²Ã¼ Ã®Ã·Ã¥Ã°Ã¥Ã¤Ã¼ Ã¥Ã¹Ã¥ Ã°Ã Ã§ */ 
     perror("msgget:open"); 
     exit(EXIT_FAILURE); 
 } 
